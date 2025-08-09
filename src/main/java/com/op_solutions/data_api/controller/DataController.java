@@ -19,48 +19,30 @@ import com.op_solutions.data_api.service.DataService;
 @RequestMapping("/api/data")
 
 public class DataController {
-	
+
 	@Autowired
 	DataService service;
-	
-	
+
 	@GetMapping("/users")
-	public ResponseEntity<Object> getAllUsers()
-	{
-		
-		if(service.getAllUsersData() != null && service.getAllUsersData().size() > 0)
-		{
+	public ResponseEntity<Object> getAllUsers() {
+
+		if (service.getAllUsersData() != null && service.getAllUsersData().size() > 0) {
 			return new ResponseEntity(service.getAllUsersData(), HttpStatus.OK);
-		}
-		else {
+		} else {
 			throw new ResourceNotFoundException("All Users Data not found");
 		}
-		
-		
-		
-		
-		
+
 	}
-	
-	
+
 	@GetMapping("/user/{userId}")
-	public ResponseEntity<User> getUserFromUserId(@PathVariable("userID") Long userId)
-	{
-		
-		if(service.getUserByUserId(userId) != null)
-		{
+	public ResponseEntity<User> getUserFromUserId(@PathVariable("userID") Long userId) {
+
+		if (service.getUserByUserId(userId) != null) {
 			return new ResponseEntity<User>(service.getUserByUserId(userId), HttpStatus.OK);
 		}
-		
+
 		return new ResponseEntity<User>(HttpStatus.NO_CONTENT);
-		
-		
+
 	}
-	
-	
-	
-	
-	
-	
 
 }
